@@ -6,8 +6,8 @@ import io from 'socket.io-client';
 import TableUser from '../TableUser/TableUser';
 import ModalUser from '../ModalUser/ModalUser';
 
-import logo from '../../mern-logo.png';
-import shirts from '../../shirts.png';
+//import logo from '../../mern-logo.png';
+//import shirts from '../../shirts.png';
 import './App.css';
 
 class App extends Component {
@@ -57,7 +57,7 @@ class App extends Component {
 
   handleUserUpdated(user) {
     let users = this.state.users.slice();
-    
+
     let i = users.findIndex(u => u._id === user._id)
 
     if (users.length > i) { users[i] = user }
@@ -85,22 +85,22 @@ class App extends Component {
       <div>
         <div className='App'>
           <div className='App-header'>
-            <img src={logo} className='App-logo' alt='logo' />
-            <h1 className='App-intro'>MERN CRUD</h1>
+            {/* <img src={logo} className='App-logo' alt='logo' /> */}
+            <h1 className='App-intro'>Business Process</h1>
             <p>
-              A simple records system using MongoDB, Express.js, React.js, and Node.js. REST API was implemented on the back-end.
-              <br/>
-              CREATE, READ, UPDATE, and DELETE operations are updated in real-time to online users using Socket.io.
-            </p>
-            <a className='shirts' href='https://www.teepublic.com/en-au/user/codeweario/albums/4812-tech-stacks' target='_blank' rel='noopener noreferrer'>
+              configure your business process here
+              <br />
+              add, update or delete process.         
+                </p>
+            {/* <a className='shirts' href='https://www.teepublic.com/en-au/user/codeweario/albums/4812-tech-stacks' target='_blank' rel='noopener noreferrer'>
               <img src={shirts} alt='Buy MERN Shirts' />
-              <br/>Buy MERN Shirts
-            </a>
+              <br />Buy MERN Shirts
+            </a> */}
           </div>
         </div>
         <Container>
           <ModalUser
-            headerTitle='Add User'
+            headerTitle='Add New Process'
             buttonTriggerTitle='Add New'
             buttonSubmitTitle='Add'
             buttonColor='green'

@@ -11,20 +11,29 @@ const config = require('./config/configs');
 mongoose.Promise = global.Promise;
 
 // Connect to the database
-mongoose.connect(config.db);
+const connectDB = require('./config/db.js');
+connectDB();
+// mongoose.connect(config.db);
 
-let db = mongoose.connection;
+// let db = mongoose.connection;
 
-db.on('open', () => {
-  console.log('Connected to the database.');
-});
+// db.on('open', () => {
+//   console.log('Connected to the database.');
+// });
 
-db.on('error', (err) => {
-  console.log(`Database error: ${err}`);
-});
+// db.on('error', (err) => {
+//   console.log(`Database error: ${err}`);
+// });
 
 // Instantiate express
 const app = express();
+app.use(express.json());
+app.use(cors());
+app.get('/', async (req, res) => {
+  const response = await userModel.find();
+  return res.json({ user: response });
+});
+
 
 // Don't touch this if you don't know it
 // We are using this for the express-rate-limit middleware
@@ -59,8 +68,8 @@ const server = app.listen(port, () => {
 });
 
 // Set up socket.io
-const io = socket(server,{
-  cors:{
+const io = socket(server, {
+  cors: {
     origin: config.react_app_url,
   }
 });

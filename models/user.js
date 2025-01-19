@@ -37,17 +37,17 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'Name is required.'],
     validate: nameValidator
   },
-  email: {
+  owner: {
     type: String,
     required: [true, 'Email is required.'],
     unique: true,
     validate: emailValidator
   },
-  age: {
-    type: Number,
+  description: {
+    type: String,
     validate: ageValidator
   },
-  gender: {
+  status: {
     type: String,
     validate: genderValidator
   }

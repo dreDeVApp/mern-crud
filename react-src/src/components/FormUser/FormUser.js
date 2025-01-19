@@ -3,9 +3,9 @@ import { Message, Button, Form, Select } from 'semantic-ui-react';
 import axios from 'axios';
 
 const genderOptions = [
-  { key: 'm', text: 'Male', value: 'm' },
-  { key: 'f', text: 'Female', value: 'f' },
-  { key: 'o', text: 'Do Not Disclose', value: 'o' }
+  { key: 'ac', text: 'Active', value: 'ac' },
+  { key: 'in', text: 'Inactive', value: 'in' },
+  // { key: 'o', text: 'Do Not Disclose', value: 'o' }
 ]
 
 class FormUser extends Component {
@@ -16,8 +16,8 @@ class FormUser extends Component {
     this.state = {
       name: '',
       email: '',
-      age: '',
-      gender: '',
+      description: '',
+      status: '',
       formClassName: '',
       formSuccessMessage: '',
       formErrorMessage: ''
@@ -36,8 +36,8 @@ class FormUser extends Component {
         this.setState({
           name: response.data.name,
           email: response.data.email,
-          age: response.data.age ?? '',
-          gender: response.data.gender,
+          description: response.data.description ?? '',
+          status: response.data.status,
         });
       })
       .catch((err) => {
@@ -63,10 +63,10 @@ class FormUser extends Component {
     e.preventDefault();
 
     // Client-side validation: Check if any of the fields are empty
-    if (!this.state.name || !this.state.email || !this.state.age || !this.state.gender) {
+    if (!this.state.name || !this.state.email || !this.state.description || !this.state.status) {
       this.setState({
         formClassName: 'warning',
-        formErrorMessage: 'Please fill out all fields: Name, Email, Age, and Gender.'
+        formErrorMessage: 'Please fill out all fields: Name, N/A-Email, Description, and Status.'
       });
       return; // Stop further execution
     }
@@ -74,8 +74,8 @@ class FormUser extends Component {
     const user = {
       name: this.state.name,
       email: this.state.email,
-      age: this.state.age,
-      gender: this.state.gender
+      description: this.state.description,
+      status: this.state.status
     }
 
     // Acknowledge that if the user id is provided, we're updating via PUT
@@ -98,9 +98,9 @@ class FormUser extends Component {
       if (!this.props.userID) {
         this.setState({
           name: '',
-          email: '',
-          age: '',
-          gender: ''
+          //email: '',
+          description: '',
+          status: ''
         });
         this.props.onUserAdded(response.data.result);
         this.props.socket.emit('add', response.data.result);
@@ -138,16 +138,16 @@ class FormUser extends Component {
     return (
       <Form className={formClassName} onSubmit={this.handleSubmit}>
         <Form.Input
-          label='Name *'
+          label='Name '
           type='text'
-          placeholder='Elon Musk'
+          placeholder='e.g. Loan Application'
           name='name'
           maxLength='40'
           required
           value={this.state.name}
           onChange={this.handleInputChange}
         />
-        <Form.Input
+        {/* <Form.Input
           label='Email *'
           type='email'
           placeholder='elonmusk@tesla.com'
@@ -156,24 +156,26 @@ class FormUser extends Component {
           required
           value={this.state.email}
           onChange={this.handleInputChange}
-        />
+        /> */}
         <Form.Group widths='equal'>
           <Form.Input
-            label='Age *'
-            type='number'
-            placeholder='18'
+            label='Description '
+            type='text'
+            placeholder='description'
             min={5}
             max={130}
-            name='age'
-            value={this.state.age}
+            name='description'
+            required
+            value={this.state.description}
             onChange={this.handleInputChange}
           />
           <Form.Field
             control={Select}
-            label='Gender *'
+            label='Status'
             options={genderOptions}
-            placeholder='Gender'
-            value={this.state.gender}
+            placeholder='status'
+            required
+            value={this.state.Status}
             onChange={this.handleSelectChange}
           />
         </Form.Group>

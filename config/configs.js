@@ -2,6 +2,5 @@
 // To run locally use 'mongodb://localhost/mern-crud' instead of process.env.DB
 
 module.exports = {
-  db: process.env.DB,
-  react_app_url: "http://localhost:4200"
+  db: 'mongodb://localhost/mern-crud'
 };
