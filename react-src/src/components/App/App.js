@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 import axios from 'axios';
 import io from 'socket.io-client';
+import Navbar from '../Navbar/Navbar';
 
 import TableUser from '../TableUser/TableUser';
 import ModalUser from '../ModalUser/ModalUser';
@@ -83,21 +84,7 @@ class App extends Component {
 
     return (
       <div>
-        <div className='App'>
-          <div className='App-header'>
-            {/* <img src={logo} className='App-logo' alt='logo' /> */}
-            <h1 className='App-intro'>Business Process</h1>
-            <p>
-              configure your business process here
-              <br />
-              add, update or delete process.         
-                </p>
-            {/* <a className='shirts' href='https://www.teepublic.com/en-au/user/codeweario/albums/4812-tech-stacks' target='_blank' rel='noopener noreferrer'>
-              <img src={shirts} alt='Buy MERN Shirts' />
-              <br />Buy MERN Shirts
-            </a> */}
-          </div>
-        </div>
+        <Navbar />
         <Container>
           <ModalUser
             headerTitle='Add New Process'
